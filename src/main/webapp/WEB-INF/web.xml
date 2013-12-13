@@ -8,20 +8,36 @@
     <filter-mapping>
         <filter-name>filtroAutenticacion</filter-name>
         <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>        
+    </filter-mapping>
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>net.daw.control.Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerJSP</servlet-name>
+        <servlet-class>net.daw.control.ControllerJSP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerJSON</servlet-name>
+        <servlet-class>net.daw.control.ControllerJSON</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerJSP</servlet-name>
+        <url-pattern>/ControllerJSP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerJSON</servlet-name>
+        <url-pattern>/ControllerJSON</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>        
+    </session-config>
     <welcome-file-list>
         <welcome-file>Controller</welcome-file>
     </welcome-file-list>
