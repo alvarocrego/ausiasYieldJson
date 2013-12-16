@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operation;
 
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.LenguajeBean;
 import net.daw.dao.LenguajeDao;
 import net.daw.helper.Contexto;
-import net.daw.helper.Pagination;
+import net.daw.helper.ParserJson;
 
 /**
  *
  * @author Alvaro
  */
-public class LenguajeList1 implements Operation{
-    
+public class LenguajeList1 implements Operation {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
@@ -28,7 +27,6 @@ public class LenguajeList1 implements Operation{
         try {
             LenguajeDao oLenguajeDAO = new LenguajeDao(oContexto.getEnumTipoConexion());
             Integer intPages = oLenguajeDAO.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
-            Integer intRegisters = oLenguajeDAO.getCount(oContexto.getAlFilter());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
@@ -36,13 +34,13 @@ public class LenguajeList1 implements Operation{
                 oContexto.setPage(1);
             }
             ArrayList<LenguajeBean> listado = oLenguajeDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
-            String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";            
-            ArrayList<String> vecindad = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
-            ArrayList<Object> a = new ArrayList<>();
-            a.add(listado);
-            a.add(vecindad);
-            a.add(intRegisters);
-            return a;
+
+            ParserJson oParserJson = new ParserJson();
+            String strListado = oParserJson.listJson(listado);
+            response.setHeader("Content-Type", "application/json");
+            response.setHeader("Accept", "JSON");
+            
+            return strListado;
         } catch (Exception e) {
             throw new ServletException("LenguajeList1: View Error: " + e.getMessage());
         }
