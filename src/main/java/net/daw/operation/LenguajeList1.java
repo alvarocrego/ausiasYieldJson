@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.LenguajeBean;
 import net.daw.dao.LenguajeDao;
 import net.daw.helper.Contexto;
-import net.daw.helper.Pagination;
+import net.daw.helper.ParserJson;
 
 /**
  *
@@ -36,13 +36,9 @@ public class LenguajeList1 implements Operation{
                 oContexto.setPage(1);
             }
             ArrayList<LenguajeBean> listado = oLenguajeDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
-            String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";            
-            ArrayList<String> vecindad = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
-            ArrayList<Object> a = new ArrayList<>();
-            a.add(listado);
-            a.add(vecindad);
-            a.add(intRegisters);
-            return a;
+            ParserJson oParserJson = new ParserJson();
+            System.out.println(oParserJson.listJson(listado));
+            return oParserJson.listJson(listado);
         } catch (Exception e) {
             throw new ServletException("LenguajeList1: View Error: " + e.getMessage());
         }

@@ -27,11 +27,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllerJSP</servlet-name>
-        <url-pattern>/ControllerJSP</url-pattern>
+        <url-pattern>/jsp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllerJSON</servlet-name>
-        <url-pattern>/ControllerJSON</url-pattern>
+        <url-pattern>/json</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

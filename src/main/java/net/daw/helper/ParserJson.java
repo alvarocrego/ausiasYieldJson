@@ -15,7 +15,9 @@ import com.google.gson.Gson;
 public class ParserJson {
     
     
-    public void parser(){
+    public String listJson(Object objeto){
         Gson oGson = new Gson();
+        String strJson = oGson.toJson(objeto);
+        return "{\"list\":"+strJson+"}";
     }
 }

@@ -44,6 +44,7 @@ public class ControllerJSON extends HttpServlet {
             String strNombreOperacion = "net.daw.operation." + oContexto.getOperacion();
             Operation oOperation = (Operation) Class.forName(strNombreOperacion).newInstance();
             try {
+                response.addHeader(strNombreOperacion, strNombreOperacion);
                 oContexto.setParametro(oOperation.execute(request, response));
             } catch (Exception e) {
                 throw new ServletException("Controller: Error: ServletException " + e.getMessage());
